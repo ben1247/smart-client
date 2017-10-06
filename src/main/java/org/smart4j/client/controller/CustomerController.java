@@ -1,0 +1,30 @@
+package org.smart4j.client.controller;
+
+import org.smart4j.client.model.Customer;
+import org.smart4j.client.service.CustomerService;
+import org.smart4j.framework.annotation.Action;
+import org.smart4j.framework.annotation.Controller;
+import org.smart4j.framework.annotation.Inject;
+import org.smart4j.framework.bean.Param;
+import org.smart4j.framework.bean.View;
+
+import java.util.List;
+
+/**
+ * Created by yuezhang on 17/10/6.
+ */
+@Controller
+public class CustomerController {
+
+    @Inject
+    private CustomerService customerService;
+
+    @Action("get:/customer")
+    public View index(Param param){
+        List<Customer> customerList = customerService.getCustomerList();
+        return new View("customer.jsp").addModel("customerList",customerList);
+    }
+
+
+
+}
