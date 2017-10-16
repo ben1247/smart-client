@@ -1,0 +1,1 @@
+smart-client use smart-framework
