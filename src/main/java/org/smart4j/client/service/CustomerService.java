@@ -2,6 +2,7 @@ package org.smart4j.client.service;
 
 import org.smart4j.client.model.Customer;
 import org.smart4j.framework.annotation.Service;
+import org.smart4j.framework.annotation.Transaction;
 import org.smart4j.framework.helper.DatabaseHelper;
 
 import java.util.ArrayList;
@@ -38,8 +39,13 @@ public class CustomerService {
      * @param fieldMap
      * @return
      */
+    @Transaction
     public boolean createCustomer(Map<String,Object> fieldMap){
-        return DatabaseHelper.insertEntity(Customer.class,fieldMap);
+        boolean result = DatabaseHelper.insertEntity(Customer.class,fieldMap);
+        if (result){
+            throw new RuntimeException("没有理由的抛异常！！");
+        }
+        return result;
     }
 
     /**

@@ -14,6 +14,7 @@
 </head>
 <body>
     <h1>客户列表</h1>
+    <a href="${BASE}/customer_edit_page">添加</a>
     <table>
         <tr>
             <th>客户名称</th>
