@@ -10,6 +10,7 @@ import org.smart4j.framework.bean.Param;
 import org.smart4j.framework.bean.View;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 处理客户管理相关请求
@@ -39,13 +40,14 @@ public class CustomerController {
      */
     @Action("post:/customer_create")
     public Data createSubmit(Param param){
-        Customer c1 = new Customer();
-        c1.setId(1L);
-        c1.setName("customer1");
-        c1.setContact("Jack");
-        c1.setTelephone("13918648191");
-        c1.setEmail("jack@gmail.com");
-        return new Data(c1);
+        customerService.createCustomer(param.getMap());
+        Customer customer = new Customer();
+        customer.setId(param.getLong("id"));
+        customer.setName(param.getString("name"));
+        customer.setContact(param.getString("contact"));
+        customer.setTelephone(param.getString("telephone"));
+        customer.setEmail(param.getString("email"));
+        return new Data(customer);
     }
 
 }

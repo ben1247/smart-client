@@ -2,9 +2,11 @@ package org.smart4j.client.service;
 
 import org.smart4j.client.model.Customer;
 import org.smart4j.framework.annotation.Service;
+import org.smart4j.framework.helper.DatabaseHelper;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by yuezhang on 17/10/6.
@@ -12,28 +14,50 @@ import java.util.List;
 @Service
 public class CustomerService {
 
+    /**
+     * 获取客户列表
+     * @return
+     */
+    public List<Customer> getCustomerList(){
+        String sql = "SELECT * FROM customer";
+        return DatabaseHelper.queryEntityList(Customer.class,sql);
+    }
 
-    public List<Customer> getCustomerList() {
+    /**
+     * 获取客户
+     * @param id
+     * @return
+     */
+    public Customer getCustomer(long id){
+        String sql = "SELECT * FROM customer WHERE id=" + id;
+        return DatabaseHelper.getEntity(Customer.class,sql);
+    }
 
-        List<Customer> customers = new ArrayList<>();
+    /**
+     * 创建客户
+     * @param fieldMap
+     * @return
+     */
+    public boolean createCustomer(Map<String,Object> fieldMap){
+        return DatabaseHelper.insertEntity(Customer.class,fieldMap);
+    }
 
-        Customer c1 = new Customer();
-        c1.setId(1L);
-        c1.setName("customer1");
-        c1.setContact("Jack");
-        c1.setTelephone("13918648191");
-        c1.setEmail("jack@gmail.com");
+    /**
+     * 更新客户
+     * @param id
+     * @param fieldMap
+     * @return
+     */
+    public boolean updateCustomer(long id , Map<String,Object> fieldMap){
+        return DatabaseHelper.updateEntity(Customer.class,id,fieldMap);
+    }
 
-        Customer c2 = new Customer();
-        c2.setId(2L);
-        c2.setName("customer2");
-        c2.setContact("Rose");
-        c2.setTelephone("13918648192");
-        c2.setEmail("rose@gmail.com");
-
-        customers.add(c1);
-        customers.add(c2);
-
-        return customers;
+    /**
+     * 删除客户
+     * @param id
+     * @return
+     */
+    public boolean deleteCustomer(long id){
+        return DatabaseHelper.deleteEntity(Customer.class,id);
     }
 }
