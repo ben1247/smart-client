@@ -8,10 +8,12 @@ import org.smart4j.framework.annotation.Action;
 import org.smart4j.framework.annotation.Controller;
 import org.smart4j.framework.annotation.Inject;
 import org.smart4j.framework.bean.Data;
+import org.smart4j.framework.bean.FileParam;
 import org.smart4j.framework.bean.Param;
 import org.smart4j.framework.bean.View;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 处理客户管理相关请求
@@ -27,11 +29,10 @@ public class CustomerController {
 
     /**
      * 客户列表页面
-     * @param param
      * @return
      */
     @Action("get:/customer")
-    public View customerListPage(Param param){
+    public View customerListPage(){
         List<Customer> customerList = customerService.getCustomerList();
         return new View("customer.jsp").addModel("customerList",customerList);
     }
@@ -41,7 +42,7 @@ public class CustomerController {
      * @return
      */
     @Action("get:/customer_edit_page")
-    public View customerEditPage(Param param){
+    public View customerEditPage(){
         return new View("customerEdit.jsp");
     }
 
@@ -52,20 +53,10 @@ public class CustomerController {
      */
     @Action("post:/customer_create")
     public Data createSubmit(Param param){
-
-        try {
-            customerService.createCustomer(param.getMap());
-        }catch (Exception e){
-            LOGGER.error(e.getMessage(),e);
-        }
-
-        Customer customer = new Customer();
-//        customer.setId(param.getLong("id"));
-        customer.setName(param.getString("name"));
-        customer.setContact(param.getString("contact"));
-        customer.setTelephone(param.getString("telephone"));
-        customer.setEmail(param.getString("email"));
-        return new Data(customer);
+        Map<String,Object> fieldMap = param.getFieldMap();
+        FileParam fileParam = param.getFile("photo");
+        boolean result = customerService.createCustomer(fieldMap,fileParam);
+        return new Data(result);
     }
 
 }

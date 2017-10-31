@@ -3,7 +3,9 @@ package org.smart4j.client.service;
 import org.smart4j.client.model.Customer;
 import org.smart4j.framework.annotation.Service;
 import org.smart4j.framework.annotation.Transaction;
+import org.smart4j.framework.bean.FileParam;
 import org.smart4j.framework.helper.DatabaseHelper;
+import org.smart4j.framework.helper.UploadHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,10 +42,10 @@ public class CustomerService {
      * @return
      */
     @Transaction
-    public boolean createCustomer(Map<String,Object> fieldMap){
+    public boolean createCustomer(Map<String,Object> fieldMap,FileParam fileParam){
         boolean result = DatabaseHelper.insertEntity(Customer.class,fieldMap);
-        if (result){
-            throw new RuntimeException("没有理由的抛异常！！");
+        if(result){
+            UploadHelper.uploadFile("/tmp/upload",fileParam);
         }
         return result;
     }
