@@ -43,11 +43,9 @@ public class CustomerService {
      */
     @Transaction
     public boolean createCustomer(Map<String,Object> fieldMap,FileParam fileParam){
-        boolean result = DatabaseHelper.insertEntity(Customer.class,fieldMap);
-        if(result){
-            UploadHelper.uploadFile("/tmp/upload",fileParam);
-        }
-        return result;
+        String photo = UploadHelper.uploadFile("/tmp/upload",fileParam);
+        fieldMap.put("photo",photo);
+        return DatabaseHelper.insertEntity(Customer.class,fieldMap);
     }
 
     /**

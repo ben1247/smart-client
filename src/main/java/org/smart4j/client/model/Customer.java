@@ -19,6 +19,8 @@ public class Customer implements Serializable{
 
     private String email;
 
+    private String photo;
+
     private String remark;
 
     public Long getId() {
@@ -59,6 +61,14 @@ public class Customer implements Serializable{
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
     }
 
     public String getRemark() {
