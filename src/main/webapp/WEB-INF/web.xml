@@ -7,4 +7,20 @@
 
     <!-- 使用Servlet 3.0 框架时可以省略web.xml文件的，因为Servlet无须在web.xml里配置，只需要通过java注解的方式来配置即可。-->
 
+
+
+
+    <!-- 通过EnvironmentLoaderListener这个监听器来初始化SecurityManager,并通过ShiroFilter来完成认证和授权 -->
+    <listener>
+        <listener-class>org.apache.shiro.web.env.EnvironmentLoaderListener</listener-class>
+    </listener>
+    <filter>
+        <filter-name>ShiroFilter</filter-name>
+        <filter-class>org.apache.shiro.web.servlet.ShiroFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>ShiroFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
 </web-app>

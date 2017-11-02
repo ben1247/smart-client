@@ -11,6 +11,7 @@
     <packaging>war</packaging>
 
     <dependencies>
+        <!-- smart-framework -->
         <dependency>
             <groupId>org.smart4j</groupId>
             <artifactId>smart-framework</artifactId>
