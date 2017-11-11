@@ -12,17 +12,17 @@
 
     <dependencies>
         <!-- smart-framework -->
-        <!--<dependency>-->
-            <!--<groupId>org.smart4j</groupId>-->
-            <!--<artifactId>smart-framework</artifactId>-->
-            <!--<version>1.0.0-SNAPSHOT</version>-->
-        <!--</dependency>-->
-        <!-- smart-plugin-security -->
         <dependency>
             <groupId>org.smart4j</groupId>
-            <artifactId>smart-plugin-security</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <artifactId>smart-framework</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
         </dependency>
+        <!-- smart-plugin-security -->
+        <!--<dependency>-->
+            <!--<groupId>org.smart4j</groupId>-->
+            <!--<artifactId>smart-plugin-security</artifactId>-->
+            <!--<version>1.0-SNAPSHOT</version>-->
+        <!--</dependency>-->
     </dependencies>
 
     <build>
